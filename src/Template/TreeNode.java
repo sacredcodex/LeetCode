@@ -86,6 +86,7 @@ public class TreeNode<T extends Comparable<T>> {
 
 	}
 
+
 	public static void main(String[] args) {
 		TreeNode<Integer> head = new TreeNode<>(13, new TreeNode(10,new TreeNode(7), new TreeNode(12)), new TreeNode(15, null, new TreeNode(16)));
 		head.toString(3);
