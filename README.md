@@ -1,4 +1,4 @@
-This is a repository of some Java solution for Leetcode. 
+This is a repository of some Java solutions for Leetcode. 
 
 The codes in `/src/solved` are completed solution for corresponding problem (usually not the best solution).
 
