@@ -1,8 +1,8 @@
-package Solved;
+package MianShi;
 
 import java.util.HashSet;
 
-public class SolutionMS01_08 {
+public class Solution01_08 {
     // https://leetcode.cn/problems/zero-matrix-lcci/
     public void setZeroes(int[][] matrix) {
         HashSet<Integer> columns = new HashSet<>();
