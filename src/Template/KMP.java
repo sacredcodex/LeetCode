@@ -17,7 +17,7 @@ public class KMP {
                 i += 1;
                 j += 1;
                 if (j == n) {
-                    res.add(i - n);
+                    res.add(i - j);
                     j = next[j - 1];
                 }
             }else if (j == 0){
@@ -55,6 +55,7 @@ public class KMP {
 
 
     public static void main(String[] args) {
+        System.out.println(Arrays.toString(search("abcabcdabab", "abcd")));
         System.out.println(Arrays.toString(getNext("abcacabca")));
     }
 }
