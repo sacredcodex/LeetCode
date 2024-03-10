@@ -1,9 +1,6 @@
 package Solved;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 public class Solution993 {
 	public class TreeNode {
@@ -50,6 +47,37 @@ public class Solution993 {
 				return false;
 			list.clear();
 			list = treeNodes;
+		}
+		return false;
+	}
+
+	public boolean isCousins1(TreeNode root, int x, int y) {
+		HashSet<TreeNode> set = new HashSet<>();
+		set.add(root);
+		while (!set.isEmpty()){
+			HashSet<TreeNode> next = new HashSet<>();
+			HashSet<Integer> values = new HashSet<>();
+			for (TreeNode node : set){
+				if (node.left != null) {
+					next.add(node.left);
+					values.add(node.left.val);
+				}
+				if (node.right != null){
+					next.add(node.right);
+					values.add(node.right.val);
+				}
+			}
+			if (values.contains(x) && values.contains(y)){
+				for (TreeNode node : set)
+					if (node.left != null && node.right != null){
+						if ((node.left.val == x && node.right.val == y) || (node.left.val == y && node.right.val == x))
+							return false;
+					}
+				return true;
+			}
+			if (values.contains(x) || values.contains(y))
+				return false;
+			set = next;
 		}
 		return false;
 	}

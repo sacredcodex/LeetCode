@@ -2,38 +2,51 @@ package Solved;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 
 public class Solution15 {
     public List<List<Integer>> threeSum(int[] nums) {
-        List<List<Integer>> result = new ArrayList<>();
         Arrays.sort(nums);
-        int target;
-        for (int i = 0; i < nums.length; i++) {
-            for (int j = i+1; j < nums.length; j++) {
-                target = -nums[i] - nums[j];
-                if (contain(nums, j + 1, nums.length - 1, target)){
-                    result.add(new ArrayList<>(Arrays.asList(nums[i], nums[j], target)));
-                }
+        List<List<Integer>> res = new ArrayList<>();
+        int i,j,k;
+        int length = nums.length;
+        for (i = 0;i < length; i = add(nums, i)) {
+            j = i+1;
+            k = length - 1;
+            while (j < k){
+                int s = nums[j]+nums[k]+nums[i];
+                if (s == 0) {
+                    List<Integer> pair = new ArrayList<>();
+                    pair.add(nums[i]);
+                    pair.add(nums[j]);
+                    pair.add(nums[k]);
+                    res.add(pair);
+                    j = add(nums, j);
+                    k = minus(nums, k);
+                }else if (s < 0)
+                    j = add(nums, j);
+                else k = minus(nums, k);
             }
         }
-        return result;
+        return res;
     }
 
-    public boolean contain(int[] nums, int start, int end, int target){
-        if (start == nums.length)
-            return false;
-        if (nums[start] > target)
-            return false;
-        if (nums[end - 1] < target)
-            return false;
-        int mid = start + end;
-        mid >>= 1;
-        if (nums[mid] == target)
-            return true;
-        if (nums[mid] < target)
-            return contain(nums, mid + 1, end, target);
-        else
-            return contain(nums, start, mid, target);
+    private int add(int[] nums, int i){
+        int val = nums[i];
+        while (true){
+            i += 1;
+            if (i == nums.length || nums[i] != val)
+                return i;
+        }
+    }
+
+    private int minus(int[] nums, int i){
+        int val = nums[i];
+        while (true){
+            i -= 1;
+            if (i == -1 || nums[i] != val)
+                return i;
+        }
     }
 }

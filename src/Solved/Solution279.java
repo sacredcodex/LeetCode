@@ -1,5 +1,10 @@
 package Solved;
 
+import java.util.Arrays;
+import java.util.HashMap;
+
+import static java.lang.Math.min;
+
 public class Solution279 {
 	private final static int[] squares = {1,4,9,16,25,36,49,64,81,100,
 			121,144,169,196,225,256,289,324,361,400,
@@ -11,7 +16,7 @@ public class Solution279 {
 			5041,5184,5329,5476,5625,5776,5929,6084,6241,6400,
 			6561,6724,6889,7056,7225,7396,7569,7744,7921,8100,
 			8281,8464,8649,8836,9025,9216,9409,9604,9801,10000};
-	public int numSquares(int n) {
+	public int numSquares1(int n) {
 		boolean isTwo = false;
 		for (int square1 : squares){
 			if (n == square1) return 1;
@@ -29,5 +34,23 @@ public class Solution279 {
 		}
 		if ((n & 7) == 7) return 4;
 		return 3;
+	}
+
+	HashMap<Integer,Integer> numToSqu = new HashMap<>();
+	public int numSquares(int n) {
+		if (numToSqu.containsKey(n)) return numToSqu.get(n);
+		int idx = Arrays.binarySearch(squares, n);
+		if (idx >= 0) {
+			numToSqu.put(n, 1);
+			return 1;
+		}
+		idx = -idx -2;
+		int res = Integer.MAX_VALUE;
+		while(idx >= 0){
+			res = min(res, numSquares((n-squares[idx]))+1);
+			idx -= 1;
+		}
+		numToSqu.put(n,res);
+		return res;
 	}
 }

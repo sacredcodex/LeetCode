@@ -57,5 +57,6 @@ public class KMP {
     public static void main(String[] args) {
         System.out.println(Arrays.toString(search("abcabcdabab", "abcd")));
         System.out.println(Arrays.toString(getNext("abcacabca")));
+        System.out.println(Arrays.toString(getNext("papa")));
     }
 }
